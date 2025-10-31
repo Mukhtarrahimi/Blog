@@ -8,6 +8,7 @@ router.get('', (req, res) => {
   };
   res.render('index', { title: 'Home', local });
 });
+
 router.get('/about', (req, res) => {
   res.render('about', { title: 'About' });
 });
