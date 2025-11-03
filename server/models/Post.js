@@ -3,19 +3,19 @@ const Schema = mongoose.Schema;
 
 const PostSchema = new Schema({
   title: {
-    typeof: String,
+    type: String,
     required: true,
   },
   body: {
-    typeof: String,
+    type: String,
     required: true,
   },
   createdAt: {
-    typeof: Date,
+    type: Date,
     default: Date.now,
   },
   updatedAt: {
-    typeof: Date,
+    type: Date,
     default: Date.now,
   },
 });
