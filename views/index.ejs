@@ -11,12 +11,14 @@
 <section class="articles">
   <h2 class="articles__heading">Latest Post</h2>
   <ul class="article-ul">
+    <% posts.forEach(post => { %>
     <li>
-      <a href="#">
-        <span> Post Title </span>
-        <span class="article-list__date">Date</span>
+      <a href="/post/<%= post._id %>" class="article-list">
+        <span> <%= post.title %></span>
+        <span class="article-list__date"><%= post.createdAt.toString() %></span>
       </a>
     </li>
+    <% }) %>
   </ul>
   <a href="#" class="pagination">&lt; View Older Posts</a>
 </section>
