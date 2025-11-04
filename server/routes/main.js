@@ -18,7 +18,7 @@ router.get('', async (req, res) => {
     const nextPage = parseInt(page) + 1;
     const prevPage = parseInt(page) - 1;
     const hasNextPage = nextPage <= Math.ceil(count / perPage);
-    const hasPrevPage = prevPage >= Math.ceil(count / perPage);
+    const hasPrevPage = prevPage >= 1;
     res.render('index', {
       locals,
       data,
