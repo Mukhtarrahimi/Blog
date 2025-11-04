@@ -62,9 +62,16 @@ router.post('/search', async (req, res) => {
       title: 'Search',
       description: 'Simple Blog created with NodeJs, Express & MongoDb',
     };
-    const searchTerm = req.body.searchTerm;
-    console.log(searchTerm);
-    res.send('node');
+    let searchTerm = req.body.searchTerm;
+    const searchNoSpecialChar = searchTerm.replace(/[^a-zA-Z0-9]/g, '');
+
+    const data = await Post.find({
+      $or: [
+        { title: { $regex: new RegExp(searchNoSpecialChar, 'i') } },
+        { body: { $regex: new RegExp(searchNoSpecialChar, 'i') } },
+      ],
+    });
+    res.send(searchTerm);
   } catch (err) {
     console.log(err);
   }
