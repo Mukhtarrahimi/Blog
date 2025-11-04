@@ -55,6 +55,21 @@ router.get('/post/:id', async (req, res) => {
   }
 });
 
+// POST
+router.post('/search', async (req, res) => {
+  try {
+    const locals = {
+      title: 'Search',
+      description: 'Simple Blog created with NodeJs, Express & MongoDb',
+    };
+    const searchTerm = req.body.searchTerm;
+    console.log(searchTerm);
+    res.send('node');
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 router.get('/about', (req, res) => {
   res.render('about');
 });
