@@ -8,17 +8,23 @@ router.get('', async (req, res) => {
       title: 'Node js ',
       description: 'This is a Node js project',
     };
+
     let perPage = 6;
-    let page = req.query.page || 1;
+    let page = parseInt(req.query.page) || 1;
+
     const data = await Post.find()
-      .skip(perPage * page - perPage)
-      .limit(perPage)
-      .exec();
+      .sort({ createdAt: -1 })
+      .skip((page - 1) * perPage)
+      .limit(perPage);
+
     const count = await Post.countDocuments();
-    const nextPage = parseInt(page) + 1;
-    const prevPage = parseInt(page) - 1;
+
+    const nextPage = page + 1;
+    const prevPage = page - 1;
+
     const hasNextPage = nextPage <= Math.ceil(count / perPage);
     const hasPrevPage = prevPage >= 1;
+
     res.render('index', {
       locals,
       data,
