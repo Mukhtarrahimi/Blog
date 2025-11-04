@@ -4,9 +4,9 @@ const Post = require('../models/Post');
 
 router.get('', async (req, res) => {
   try {
-    let locals = {
-      title: 'Node js ',
-      description: 'This is a Node js project',
+    const locals = {
+      title: 'NodeJs Blog ',
+      description: 'Simple Blog created with NodeJs, Express & MongoDb',
     };
 
     let perPage = 6;
@@ -36,6 +36,23 @@ router.get('', async (req, res) => {
     console.log(err);
   }
 });
+
+// GET POST:ID
+router.get('/post/:id', async(req, res) =>{
+  try {
+    const locals = {
+      title: 'NodeJs Blog ',
+      description: 'Simple Blog created with NodeJs, Express & MongoDb',
+    };
+
+  }
+})
+
+
+
+
+
+
 
 router.get('/about', (req, res) => {
   res.render('about');
