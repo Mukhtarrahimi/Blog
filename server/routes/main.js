@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const Post = require('../models/Post');
-const e = require('express');
 
 router.get('', async (req, res) => {
   try {
@@ -9,28 +8,26 @@ router.get('', async (req, res) => {
       title: 'Node js ',
       description: 'This is a Node js project',
     };
+    let perPage = 6;
+    let page = req.query.Post || 1;
 
-    let perPage = 5;
-    let page = req.query.page || 1;
+    const data = await Post.find();
 
-    const data = await Post.aggregate([{ $sort: { createdAt: -1 } }])
-      .skip(perPage * page - perPage)
-      .limit(perPage)
-      .exec();
-    const count = await Post.countDocuments();
+    const count = Post.countDocuments();
     const nextPage = parseInt(page) + 1;
-    const hasNextPage = nextPage <= Math.ceil(count / perPage);
+    const hasNextPage = Math.ceil(count / perPage);
 
     res.render('index', {
       locals,
       data,
-      current: page,
+      hasNextPage,
       nextPage: hasNextPage ? nextPage : null,
     });
   } catch (err) {
     console.log(err);
   }
 });
+
 router.get('/about', (req, res) => {
   res.render('about');
 });
