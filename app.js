@@ -17,6 +17,7 @@ app.set('layout', './layouts/main');
 app.set('view engine', 'ejs');
 
 app.use('/', require('./server/routes/main'));
+app.use('/', require('./server/routes/admin'));
 
 // server setup
 const PORT = process.env.PORT || 5000;
