@@ -1,6 +1,7 @@
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const cookieParser = require('cookie-parser');
+const MongooStore = require('connect-mongo');
 require('dotenv').config();
 const app = express();
 const connectDB = require('./server/config/db');
