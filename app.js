@@ -11,14 +11,16 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser);
-app.use(session{
-  secret: 'keyboard cat',
-  resave: false,
-  saveUnitialized: true,
-  store: MongooStore.create({
-    mongoUrl: process.env.MONGODB_URI
+app.use(
+  session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUnitialized: true,
+    store: MongooStore.create({
+      mongoUrl: process.env.MONGODB_URI,
+    }),
   })
-})
+);
 
 // Connect to database
 connectDB();
