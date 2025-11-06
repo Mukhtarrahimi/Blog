@@ -36,7 +36,7 @@ router.post('/admin', async (req, res) => {
 router.post('/register', async (req, res) => {
   try {
     const { username, password } = req.body;
-    res.send('');
+    const hashedPassword = await bcrypt.hash(password, 10);
   } catch (err) {
     console.log(err);
   }
