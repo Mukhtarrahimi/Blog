@@ -5,11 +5,20 @@ const MongooStore = require('connect-mongo');
 require('dotenv').config();
 const app = express();
 const connectDB = require('./server/config/db');
+const session = require('express-session');
 
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser);
+app.use(session{
+  secret: 'keyboard cat',
+  resave: false,
+  saveUnitialized: true,
+  store: MongooStore.create({
+    mongoUrl: process.env.MONGODB_URI
+  })
+})
 
 // Connect to database
 connectDB();
