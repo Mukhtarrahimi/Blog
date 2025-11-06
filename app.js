@@ -14,6 +14,7 @@ connectDB();
 // Template engine setup
 app.use(expressLayouts);
 app.set('layout', './layouts/main');
+
 app.set('view engine', 'ejs');
 
 app.use('/', require('./server/routes/main'));

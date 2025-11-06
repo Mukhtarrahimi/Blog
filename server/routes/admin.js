@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const Post = require('../models/Post');
-const adminLayout = require('../views/layouts/admin');
 
 router.get('/admin', async (req, res) => {
   try {
@@ -9,9 +8,9 @@ router.get('/admin', async (req, res) => {
       title: 'Admin',
       body: 'Simple Blog created with NodeJs, Express & MongoDb',
     };
-    res.render('/admin/index', {
+    res.render('admin/index', {
       locals,
-      layout: adminLayout,
+      layout: 'layouts/admin',
     });
   } catch (err) {
     console.log(err);
