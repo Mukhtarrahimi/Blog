@@ -31,4 +31,13 @@ router.post('/admin', async (req, res) => {
   }
 });
 
+router.post('/register', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    res.send('');
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 module.exports = router;
