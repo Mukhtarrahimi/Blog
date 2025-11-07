@@ -5,6 +5,8 @@ const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+const adminLayout = '../views/layouts/admin';
+const jwtSecret = process.env.JWT_SECRET;
 router.get('/admin', async (req, res) => {
   try {
     const locals = {
