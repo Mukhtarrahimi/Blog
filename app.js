@@ -1,22 +1,23 @@
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const cookieParser = require('cookie-parser');
-const MongooStore = require('connect-mongo');
+const MongoStore = require('connect-mongo');
+const session = require('express-session');
 require('dotenv').config();
 const app = express();
 const connectDB = require('./server/config/db');
-const session = require('express-session');
 
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cookieParser);
+app.use(cookieParser()); // ← FIXED
+
 app.use(
   session({
     secret: 'keyboard cat',
     resave: false,
-    saveUnitialized: true,
-    store: MongooStore.create({
+    saveUninitialized: true,
+    store: MongoStore.create({
       mongoUrl: process.env.MONGODB_URI,
     }),
   })
