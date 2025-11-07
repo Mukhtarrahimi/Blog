@@ -20,6 +20,7 @@ router.get('/admin', async (req, res) => {
   }
 });
 
+// login
 router.post('/admin', async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -33,6 +34,23 @@ router.post('/admin', async (req, res) => {
   }
 });
 
+router.post('/admin', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(401).json({ message: 'Invalid creadentials' });
+    }
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: 'Invalid creadentials' });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+// Register
 router.post('/register', async (req, res) => {
   try {
     const { username, password } = req.body;
