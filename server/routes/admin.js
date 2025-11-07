@@ -48,6 +48,8 @@ router.post('/admin', async (req, res) => {
       return res.status(401).json({ message: 'Invalid creadentials' });
     }
     const token = jwt.sign({ userId: user._id }, jwtSecret);
+    res.cookie('token', token, { httpOnly: true });
+    res.redirect('/dashboard');
   } catch (err) {
     console.log(err);
   }
