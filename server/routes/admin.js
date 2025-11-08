@@ -46,6 +46,27 @@ router.get('/admin', async (req, res) => {
 });
 
 /**
+ * GET /
+ * Admin - Create New Post
+ */
+router.get('/add-post', authMiddleware, async (req, res) => {
+  try {
+    const locals = {
+      title: 'Add Post',
+      description: 'Simple Blog created with NodeJs, Express & MongoDb.',
+    };
+
+    const data = await Post.find();
+    res.render('admin/add-post', {
+      locals,
+      layout: adminLayout,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+/**
  * POST /
  * Admin - Check Login
  */
