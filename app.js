@@ -10,10 +10,7 @@ app.use(expressLayouts);
 app.set('layouts', './layouts/main');
 app.set('view engine', 'ejs');
 
-app.get('', (req, res) => {
-  res.send('Hello World!');
-});
-
+app.use('/', require('./server/routes/main'));
 // server setup
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
