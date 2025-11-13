@@ -3,6 +3,8 @@ const expressLayouts = require('express-ejs-layouts');
 require('dotenv').config();
 const app = express();
 
+app.use(express.static('public'));
+
 // Template engine setup
 app.use(expressLayouts);
 app.set('layouts', './layouts/main');
