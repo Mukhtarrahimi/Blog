@@ -1,6 +1,12 @@
 const express = require('express');
+const expressLayouts = require('express-ejs-layouts');
 require('dotenv').config();
 const app = express();
+
+// Template engine setup
+app.use(expressLayouts);
+app.set('layouts', './layouts/main');
+app.set('view engine', 'ejs');
 
 app.get('', (req, res) => {
   res.send('Hello World!');
