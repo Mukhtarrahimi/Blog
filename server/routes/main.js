@@ -9,20 +9,20 @@ router.get('', async (req, res) => {
       description: 'This is a Node js project',
     };
     let perPage = 6;
-    let page = req.query.Post || 1;
+    let page = req.query.page || 1;
 
     const data = await Post.aggregate([{ $sort: { createdAt: -1 } }])
       .skip(perPage * page - perPage)
       .limit(perPage)
       .exec();
-
     const count = Post.countDocuments();
     const nextPage = parseInt(page) + 1;
-    const hasNextPage = nextPage >= Math.ceil(count / perPage);
+    const hasNextPage = nextPage <= Math.ceil(count / perPage);
 
     res.render('index', {
       locals,
       data,
+      current: page,
       nextPage: hasNextPage ? nextPage : null,
     });
   } catch (err) {
