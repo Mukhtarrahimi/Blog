@@ -11,16 +11,18 @@ router.get('', async (req, res) => {
     let perPage = 6;
     let page = req.query.Post || 1;
 
-    const data = await Post.find();
+    const data = await Post.aggregate([{ $sort: { createdAt: -1 } }])
+      .skip(perPage * page - perPage)
+      .limit(perPage)
+      .exec();
 
     const count = Post.countDocuments();
     const nextPage = parseInt(page) + 1;
-    const hasNextPage = Math.ceil(count / perPage);
+    const hasNextPage = nextPage >= Math.ceil(count / perPage);
 
     res.render('index', {
       locals,
       data,
-      hasNextPage,
       nextPage: hasNextPage ? nextPage : null,
     });
   } catch (err) {
